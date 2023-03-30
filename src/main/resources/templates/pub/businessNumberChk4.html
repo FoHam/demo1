@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사업자번호 확인</title>
+  <style>
+    .hidden { display: none}
+
+  </style>
+</head>
+<body>
+<form method="post" action="/pubData2/bn4_1">
+  <p class="item item1">
+    <label for="businessNm">사업자번호</label>
+    <input type="text" id="businessNm" name="businessNm">
+    <input type="text" name="name" id="name">
+    <button id="chkBtn3">확인</button></p>
+  <p class="item item2 hidden">
+    <label for="start_dt">개업일자</label><input type="text" id="start_dt">
+    <label for="p_nm">대표자명</label><input type="text" id="p_nm">
+    <button id="chkBtn2">확인</button>
+  </p>
+</form>
+<script type="module">
+</script>
+</body>
+</html>

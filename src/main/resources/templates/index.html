@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Title</title>
+  </head>
+  <body>
+    <ul>
+      <li><a href="#" id="menu1">부산맛집</a></li>
+      <li><a href="/pubData2/bn">사업자상태확인(브라우저)</a></li>
+      <li><a href="/pubData2/bn10">사업자상태확인(was)</a></li>
+      <ul>
+        <li><a href="/pubData2/bn2">사업자상태확인(WAS)_url_QueryParameter</a></li>
+        <li><a href="/pubData2/bn3">사업자상태확인(WAS)_url_경로</a></li>
+        <li><a href="/pubData2/bn4">사업자상태확인(WAS)_요청메세지바디</a></li>
+        <li><a href="/pubData2/bn5">사업자상태확인(WAS)_요청메세지헤더</a></li>
+      </ul>
+    </ul>
+    <script type="module">
+      import { ajax } from '../js/common.js';
+
+      const $menu1 = document.getElementById('menu1');
+      const list = res => {
+        if (res.getFoodKr.header.code == '00') {
+          const items = res.getFoodKr.item;
+          items.forEach(item => {
+            const keys = Object.keys(item);
+            keys.forEach(key => console.log(`${key} - ${item[key]}`));
+          });
+        } else {
+          new Error(`${res.getFoodKr.header.message}`);
+        }
+      };
+
+      $menu1.addEventListener('click', e => {
+        e.preventDefault(); //기본이벤트 막기
+
+        const url = '/pubData/restaurant';
+        ajax
+          .get(url)
+          .then(res => res.json())
+          .then(res => {
+            console.log(res);
+            list(res);
+          })
+          .catch(err => console.log(err.message));
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사업자번호 확인</title>
+  <style>
+    .hidden { display: none}
+
+  </style>
+</head>
+<body>
+<form>
+  <p class="item item1">
+    <label for="businessNm">사업자번호</label>
+    <input type="text" id="businessNm" name="businessNm">
+    <input type="text" name="name" id="name">
+    <button id="chkBtn">확인</button></p>
+  <p class="item item2 hidden">
+    <label for="start_dt">개업일자</label><input type="text" id="start_dt">
+    <label for="p_nm">대표자명</label><input type="text" id="p_nm">
+    <button id="chkBtn2">확인</button>
+  </p>
+</form>
+<script type="module">
+  import {ajax} from "/js/common.js";
+  const $chkBtn = document.getElementById('chkBtn');
+  const chkBtn_h = e => {
+    console.log(e);
+    e.preventDefault();
+
+    const businessNm = document.getElementById('businessNm').value;
+    const name = document.getElementById('name').value;
+    const url = `/pubData2/bn3_1/${businessNm}/${name}`;
+    // 요청 url경로에 데이터 포함
+    ajax.get(url);
+  }
+  $chkBtn.addEventListener('click', chkBtn_h, false);
+</script>
+</body>
+</html>
